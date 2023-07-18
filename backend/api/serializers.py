@@ -15,7 +15,6 @@ from recipes.models import (Favorite,
                             Recipe,
                             ShoppingCart,
                             Tag,
-                            TagRecipe,
                             )
 
 from .validators import validate_username

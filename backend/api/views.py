@@ -92,7 +92,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
         if request.method == 'POST':
             if ShoppingCart.objects.filter(user=user, recipe=recipe).exists():
-                return Response({'errors': 'Рецепт уже есть в списке покупок.'},
+                return Response({'errors': 'Рецепт уже есть в списке покупок'},
                                 status=status.HTTP_400_BAD_REQUEST,
                                 )
             serializer = ShoppingCartSerializer(
@@ -181,7 +181,6 @@ class UserViewSet(mixins.CreateModelMixin,
         instance = self.request.user
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
-
 
     @action(['post'], detail=False)
     def set_password(self, request, *args, **kwargs):

@@ -11,7 +11,9 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from .filters import IngredientFilter, RecipeFilter
-from .permissions import IsOwnerOrAdminOrReadOnly
+from .permissions import (IsCurrentUserOrAdminOrReadOnly,
+                          IsOwnerOrAdminOrReadOnly
+                          )
 from .serializers import (SubscribeSerializer,
                           RecipeReadSerializer,
                           RecipeWriteSerializer,
@@ -168,7 +170,7 @@ class UserViewSet(mixins.CreateModelMixin,
                   viewsets.GenericViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (IsOwnerOrAdminOrReadOnly,)
+    permission_classes = (IsCurrentUserOrAdminOrReadOnly,)
     pagination_class = PageNumberPagination
 
     def get_serializer_class(self):

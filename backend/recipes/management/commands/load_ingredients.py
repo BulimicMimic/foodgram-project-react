@@ -6,6 +6,8 @@ from django.db import IntegrityError
 
 from recipes.models import Ingredient
 
+from api.serializers import IngredientLoadSerializer
+
 
 class Command(BaseCommand):
     help = 'Загрузка ингредиентов.'
@@ -16,9 +18,21 @@ class Command(BaseCommand):
                   encoding='utf-8',
                   ) as csv_file:
             reader = csv.DictReader(csv_file)
+            ingredient_list = []
+            csv_errors = 0
+            for csv_data in reader:
+                serializer = IngredientLoadSerializer(
+                    data={**csv_data},
+                )
+                serializer.is_valid(raise_exception=True)
+                if serializer.is_valid():
+                    ingredient_list.append(Ingredient(**csv_data))
+                else:
+                    csv_errors += 1
+
             try:
-                Ingredient.objects.bulk_create(
-                    Ingredient(**data) for data in reader)
+                Ingredient.objects.bulk_create(ingredient_list)
             except IntegrityError:
                 return 'Такой ингредиент уже существует.'
-        return f'Загружено {Ingredient.objects.count()} ингредиентов.'
+        return (f'Загружено {Ingredient.objects.count()} ингредиентов.'
+                f'Ошибок в csv файле - {csv_errors}')

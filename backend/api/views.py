@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db.models import Sum
 from django.http import HttpResponse
@@ -10,29 +11,32 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
-from .filters import IngredientFilter, RecipeFilter
-from .permissions import (IsCurrentUserOrAdminOrReadOnly,
-                          IsOwnerOrAdminOrReadOnly
-                          )
-from .serializers import (SubscribeSerializer,
-                          RecipeReadSerializer,
-                          RecipeWriteSerializer,
-                          TagSerializer,
-                          IngredientSerializer,
-                          FavoriteSerializer,
-                          ShoppingCartSerializer,
-                          SubscribeRepresentationSerializer,
-                          UserSerializer,
-                          )
+from api.filters import IngredientFilter, RecipeFilter
+from api.permissions import (
+    IsCurrentUserOrAdminOrReadOnly,
+    IsOwnerOrAdminOrReadOnly,
+)
+from api.serializers import (
+    SubscribeSerializer,
+    RecipeReadSerializer,
+    RecipeWriteSerializer,
+    TagSerializer,
+    IngredientSerializer,
+    FavoriteSerializer,
+    ShoppingCartSerializer,
+    SubscribeRepresentationSerializer,
+    UserSerializer,
+)
 
-from recipes.models import (Favorite,
-                            Follow,
-                            Ingredient,
-                            IngredientRecipe,
-                            Recipe,
-                            ShoppingCart,
-                            Tag,
-                            )
+from recipes.models import (
+    Favorite,
+    Follow,
+    Ingredient,
+    IngredientRecipe,
+    Recipe,
+    ShoppingCart,
+    Tag,
+)
 
 User = get_user_model()
 

@@ -35,7 +35,7 @@ services:
     image: limic/foodgram_gateway
     env_file: .env
     ports:
-      - 9000:80
+      - ${FOODGRAM_PORT}:80
     volumes:
       - static:/static
       - media:/media

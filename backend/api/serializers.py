@@ -1,4 +1,5 @@
 import base64
+
 from django.contrib.auth import get_user_model
 from django.core.files.base import ContentFile
 from django.core.validators import EmailValidator
@@ -7,17 +8,18 @@ from rest_framework import serializers
 from rest_framework.fields import SerializerMethodField
 from rest_framework.validators import UniqueValidator, UniqueTogetherValidator
 
-from recipes.models import (Favorite,
-                            Follow,
-                            Ingredient,
-                            IngredientRecipe,
-                            MIN_AMOUNT,
-                            Recipe,
-                            ShoppingCart,
-                            Tag,
-                            )
+from recipes.models import (
+    Favorite,
+    Follow,
+    Ingredient,
+    IngredientRecipe,
+    MIN_AMOUNT,
+    Recipe,
+    ShoppingCart,
+    Tag,
+)
 
-from .validators import validate_username
+from api.validators import validate_username
 
 User = get_user_model()
 
@@ -75,6 +77,13 @@ class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ingredient
         fields = ('id', 'name', 'measurement_unit')
+
+
+class IngredientLoadSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Ingredient
+        fields = ('name', 'measurement_unit')
 
 
 class TagSerializer(serializers.ModelSerializer):

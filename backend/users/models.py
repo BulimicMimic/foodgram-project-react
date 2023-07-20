@@ -1,13 +1,13 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from .managers import CustomUserManager
+from users.managers import CustomUserManager
 
 
 class CustomUser(AbstractUser):
     class Role(models.TextChoices):
-        user = 'user', 'Пользователь'
-        admin = 'admin', 'Администратор'
+        user = ('user', 'Пользователь')
+        admin = ('admin', 'Администратор')
 
     email = models.EmailField(
         verbose_name='Адрес электронной почты',

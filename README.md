@@ -1,10 +1,5 @@
 ## Foodgram
 
-### Адрес сайта и информация для логина:
-https://cptnclaw.ddns.net/
-login: supertester
-password: supertesting1
-
 ### Автор: 
 Алаткин Александр
 

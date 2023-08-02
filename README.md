@@ -11,6 +11,7 @@ Foodgram — социальная сеть для публикации и пои
 Django
 Django Rest Framework
 Djoser
+PostgreSQL
 Gunicorn
 Nginx
 Docker
